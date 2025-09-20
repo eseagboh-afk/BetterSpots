@@ -1,0 +1,7 @@
+{
+  "name": "betterSpotsApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
