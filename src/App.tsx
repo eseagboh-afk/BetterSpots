@@ -5,6 +5,11 @@ import Home from './pages/Home';
 import Welcome from './pages/Welcome';
 import signUp from './pages/signUp';
 import signIn from './pages/signIn/signIn';
+import userProfile from './pages/userProfile';
+import viewUserProfile from './pages/viewUserProfile';
+import postSignUp from './pages/postSignUp';
+import findEvents from './pages/findEvents';
+
 
 
 
@@ -54,6 +59,10 @@ const App: React.FC = () => (
         <Route path="/Welcome" component={Welcome} exact />
         <Route path="/signUp" component={signUp} exact />
         <Route path="/signIn" component={signIn} exact/>
+        <Route path="/userProfile" component={userProfile} exact/>
+        <Route path="/viewUserProfile" component={viewUserProfile} exact/>
+        <Route path="/postSignUp" component={postSignUp} exact/>
+        <Route path="/findEvents" component={findEvents} exact/>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

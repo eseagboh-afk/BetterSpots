@@ -12,22 +12,50 @@ import
   IonButton,
   IonSelect,
   IonSelectOption,
-  IonCheckbox
 } from '@ionic/react';
 
 import { MediaCapture, MediaFile, CaptureImageOptions } from "@ionic-native/media-capture";
 
+import { auth } from "../firebase/firebase-config";
+import { createUserWithEmailAndPassword, updateProfile  } from "firebase/auth";
+import { useHistory } from 'react-router-dom';
+
 
 const signUp: React.FC = () =>
 {
-    const [firstName, setFirstName] = useState(' ');
-    const [dob, setDob] = useState(' ');
-    const [gender, setGender] = useState(' ');
-    const [interestedIn, setInterestedIn] = useState(' ');
-    const [height, setHeight] = useState(' ');
-    const [email, setEmail] = useState(' ');
-    const [password, setPassword] = useState(' ');
+    const [firstName, setFirstName] = useState('');
+    const [dob, setDob] = useState('');
+    const [gender, setGender] = useState('');
+    const [interestedIn, setInterestedIn] = useState('');
+    const [height, setHeight] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [displayName, setDisplayName] = useState('');
     const [selfie, setSelfie] = useState<MediaFile | null>(null);
+    const history = useHistory();
+
+    const handleSignUp = async () => {
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
+            const user = userCredential.user;
+
+            if (password.trim().length < 6) {
+                alert("Password must be at least 6 characters.");
+                return;
+            }
+
+            if (displayName) {
+                await updateProfile(user, { displayName });
+
+            }
+
+
+            
+        } catch(error: any)
+        {
+            alert(`Error: ${error.message}`);
+        }
+    };
 
     const captureSelfie = async () => 
     {
@@ -38,11 +66,12 @@ const signUp: React.FC = () =>
             setSelfie(captured[0]); 
 
         }
-        catch (error) 
+        catch (error: any) 
         {
             console.error("We encountered an issue when taking your selfie!", error);
         }
     };
+
 
     const handleSubmit = () => 
     {
@@ -56,14 +85,17 @@ const signUp: React.FC = () =>
             password, 
             selfie
         });
-        alert("Form submitted. Check console for details.");
+
+        history.push("/postSignUp");
+
+    
     };
 
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Sign Up</IonTitle>
+                    <IonTitle> BetterSpots | Sign Up</IonTitle>
                 </IonToolbar>
             </IonHeader>
 
@@ -99,6 +131,11 @@ const signUp: React.FC = () =>
 
 
                 <IonItem>
+                    <IonLabel position="floating">What's your first name?</IonLabel>
+                    <IonInput value={firstName} onIonChange={e => setFirstName(e.detail.value!)} />
+                </IonItem>
+
+                <IonItem>
                     <IonLabel position="floating">How tall are you? (ft'In")</IonLabel>
                     <IonInput value={height} onIonChange={e => setHeight(e.detail.value!)} placeholder={`e.g. 5'9"`} />
                 </IonItem>
@@ -113,14 +150,24 @@ const signUp: React.FC = () =>
                     <IonInput value={password} onIonChange={e => setPassword(e.detail.value!)}/>
                 </IonItem>
 
+                 <IonItem>
+                    <IonLabel position="floating">What's your preferred name?</IonLabel>
+                    <IonInput value={displayName} onIonChange={e => setDisplayName(e.detail.value!)}/>
+                </IonItem>
+
                 <IonButton expand="block" onClick={captureSelfie}>Upload Selfie (required)</IonButton>
+            
+
 
                 {selfie && <p>Looking good!<br></br>
                 Your selfie has been added as your profile pic.<br></br>
                 We do this to ensure that you are who you say you are!<br></br>
                 You can retake your selfie at anytime from your Settings page!</p>}
 
-                <IonButton expand="block" onClick={handleSubmit}>Submit</IonButton>
+                <IonButton expand="block" onClick={handleSubmit}>Sign Up!</IonButton>
+        
+
+                
 
             </IonContent>
         </IonPage>

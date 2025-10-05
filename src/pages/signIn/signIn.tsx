@@ -12,11 +12,13 @@ import
   IonButton,
 } from '@ionic/react';
 
-//import { getAuth, signInWithEmailAndPassword } from "firebase/auth";//
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useHistory } from 'react-router-dom';
 
 const signIn: React.FC = () => {
   const [email, setEmail] = useState(' ');
   const [password, setPassword] = useState(' ');
+  const history = useHistory();
 
   const handleSubmit = async () => {
     const auth = getAuth();
@@ -25,7 +27,7 @@ const signIn: React.FC = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       alert(`Welcome back, ${user.email}!`);
-      // TODO: Redirect to user profile page if needed
+      history.push("/user-profile");
     } catch (error: any) {
       alert(`Error: ${error.message}`);
     }
@@ -33,9 +35,9 @@ const signIn: React.FC = () => {
 
  return (
     <IonPage>
-      <IonHeader>
+      <IonHeader> 
         <IonToolbar>
-          <IonTitle>Sign In</IonTitle>
+          <IonTitle>BetterSpots | Sign In</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
