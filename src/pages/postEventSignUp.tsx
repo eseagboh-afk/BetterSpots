@@ -1,12 +1,12 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButton, IonText } from '@ionic/react';
 
 
-const postSignUp: React.FC = () => {
+const postEventSignUp: React.FC = () => {
    return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>BetterSpots | Sign Up Complete</IonTitle>
+                    <IonTitle>BetterSpots | Event Sign Up Confirmation</IonTitle>
                 </IonToolbar>
             </IonHeader>
 
@@ -15,11 +15,11 @@ const postSignUp: React.FC = () => {
                 <h1>Thanks for signing up!</h1>
                 </IonText>
 
-                <p>Our team will review your profile and notify you by email once it's approved.</p>
+                <p>You've been added to the list.</p>
                 
             </IonContent>
         </IonPage>
     );
 };
 
-export default postSignUp;
+export default postEventSignUp;

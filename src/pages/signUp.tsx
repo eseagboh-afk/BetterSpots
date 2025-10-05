@@ -16,8 +16,7 @@ import
 
 import { MediaCapture, MediaFile, CaptureImageOptions } from "@ionic-native/media-capture";
 
-import { auth } from "../firebase/firebase-config";
-import { createUserWithEmailAndPassword, updateProfile  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile  } from "firebase/auth";
 import { useHistory } from 'react-router-dom';
 
 
@@ -35,6 +34,9 @@ const signUp: React.FC = () =>
     const history = useHistory();
 
     const handleSignUp = async () => {
+        
+        const auth = getAuth();
+
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), password.trim());
             const user = userCredential.user;
@@ -48,6 +50,7 @@ const signUp: React.FC = () =>
                 await updateProfile(user, { displayName });
 
             }
+            history.push("/postSignUp");
 
 
             
@@ -55,6 +58,17 @@ const signUp: React.FC = () =>
         {
             alert(`Error: ${error.message}`);
         }
+
+         console.log({
+            firstName,
+            dob, 
+            gender, 
+            interestedIn,
+            height,
+            email, 
+            password, 
+            selfie
+        });
     };
 
     const captureSelfie = async () => 
@@ -72,24 +86,6 @@ const signUp: React.FC = () =>
         }
     };
 
-
-    const handleSubmit = () => 
-    {
-        console.log({
-            firstName,
-            dob, 
-            gender, 
-            interestedIn,
-            height,
-            email, 
-            password, 
-            selfie
-        });
-
-        history.push("/postSignUp");
-
-    
-    };
 
     return (
         <IonPage>
@@ -164,7 +160,7 @@ const signUp: React.FC = () =>
                 We do this to ensure that you are who you say you are!<br></br>
                 You can retake your selfie at anytime from your Settings page!</p>}
 
-                <IonButton expand="block" onClick={handleSubmit}>Sign Up!</IonButton>
+                <IonButton expand="block" onClick={handleSignUp}>Sign Up!</IonButton>
         
 
                 

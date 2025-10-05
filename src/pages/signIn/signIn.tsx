@@ -27,7 +27,7 @@ const signIn: React.FC = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       alert(`Welcome back, ${user.email}!`);
-      history.push("/user-profile");
+      history.push("/userProfile");
     } catch (error: any) {
       alert(`Error: ${error.message}`);
     }

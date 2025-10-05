@@ -35,7 +35,7 @@ const viewUserProfile: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle className="ion-text-center">MyApp</IonTitle>
+          <IonTitle className="ion-text-center">BetterSpots</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -46,18 +46,16 @@ const viewUserProfile: React.FC = () => {
 
         <IonCard className="ion-margin-top">
           <IonCardContent>
-            <h2>John Doe</h2>
-            <p>Email: john.doe@example.com</p>
-            <p>Other info...</p>
+            <h2>Test User</h2>
+            <p>27 y/o</p>
+            <p>Gender: Cis woman</p>
+            <p>Interested in: women</p>
+            <p>Height: 5'4"</p>
+            <p>Hobbies: reading, hiking, tennis</p>
+            <p>Occupation: Medical Resident - Emergency Medicine</p>
           </IonCardContent>
         </IonCard>
 
-        <IonButton expand="block" className="ion-margin-top">
-          Edit Profile
-        </IonButton>
-        <IonButton expand="block" fill="outline" className="ion-margin-top">
-          My Events
-        </IonButton>
       </IonContent>
     </IonPage>
   );

@@ -9,6 +9,9 @@ import userProfile from './pages/userProfile';
 import viewUserProfile from './pages/viewUserProfile';
 import postSignUp from './pages/postSignUp';
 import findEvents from './pages/findEvents';
+import MyEvents from './pages/myEvents';
+import postEventSignUp from './pages/postEventSignUp';
+import AttendeeList from './pages/attendeeList';
 
 
 
@@ -63,6 +66,9 @@ const App: React.FC = () => (
         <Route path="/viewUserProfile" component={viewUserProfile} exact/>
         <Route path="/postSignUp" component={postSignUp} exact/>
         <Route path="/findEvents" component={findEvents} exact/>
+        <Route path="/myEvents" component={MyEvents} exact/>
+        <Route path="/postEventSignUp" component={postEventSignUp} exact/>
+        <Route path="/attendeeList" component={AttendeeList} exact/>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
