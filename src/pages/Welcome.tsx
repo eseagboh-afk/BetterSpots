@@ -11,7 +11,6 @@ import
 import { useEffect } from "react";
 import { db } from "../firebase/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
-import ExploreContainer from '../components/ExploreContainer';
 
 const Welcome: React.FC = () => {
 

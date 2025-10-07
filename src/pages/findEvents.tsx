@@ -42,12 +42,21 @@ function findEvents()
         for (const docSnap of querySnapshot.docs) 
         {
           const eventData = docSnap.data();
-          const coffeeShopSnap = await getDoc(doc(db, "coffeeShops", eventData.coffeeShopID));
+          let coffeeShopData = null;
+          if (eventData.coffeeShopID) 
+          {
+            const coffeeShopSnap = await getDoc(doc(db, "coffeeShops", eventData.coffeeShopID));
+            if (coffeeShopSnap.exists()) {
+              coffeeShopData = coffeeShopSnap.data();
+            }
+          }
+        
 
           eventsList.push(
             {
               id: docSnap.id, 
-              ...eventData
+              ...eventData,
+              coffeeShop: coffeeShopData,
             });
         }
         setEvents(eventsList);
